@@ -1,6 +1,6 @@
 package models;
 
-public class pelicula {
+public class Pelicula {
     String titulo ;
     String fechaLanzamineto;
 
