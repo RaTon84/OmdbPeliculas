@@ -21,7 +21,7 @@ public class Titulo {
     public Titulo(TituloOmdb tituloOmdb) {
         this.nombre = tituloOmdb.title();
         this.fechaDeLanzamiento = Integer.valueOf(tituloOmdb.year());
-        String minutos = tituloOmdb.runtime().substring(0,2);
+        String minutos = tituloOmdb.runtime().substring(0,3);
         this.duracionEnMinutos = Integer.valueOf(minutos);
     }
 

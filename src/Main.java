@@ -9,17 +9,24 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Scanner;
 
 public class Main {
         public static void main (String[]args) throws IOException, InterruptedException {
+            Scanner inputTeclado = new Scanner(System.in);
+            System.out.println("ingrese la pelicula");
+            String input = inputTeclado.nextLine().replace(" ", "+" );
+            System.out.println(input);
+            /*armado de consulta web*/
+            try{
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("https://www.omdbapi.com/?t=matrix&apikey=e1bc4c5f"))
+                    .uri(URI.create("https://www.omdbapi.com/?t="+input+"&apikey=e1bc4c5f"))
                     .build();
             HttpResponse<String> response = client
                     .send(request, HttpResponse.BodyHandlers
                             .ofString());
-
+            /*retorno de datos*/
             String json =response.body();
             System.out.println(response.body());
 
@@ -31,6 +38,14 @@ public class Main {
             System.out.println("Omdb = " +mitituloOmdb);
             Titulo newTitulo = new Titulo(mitituloOmdb);
             System.out.println("Titulo =" + newTitulo);
+            }catch (NumberFormatException e){
+                System.out.println("Ocurrió un error: ");
+                System.out.println(e.getMessage());
+            }catch(IllegalArgumentException e){
+                System.out.println("Error en la URI, verifique la dirección.");
+            }/*catch (ErrorEnConversionDeDuracionException e){
+                System.out.println(e.getMessage());
+            }*/
 
     }
 }
